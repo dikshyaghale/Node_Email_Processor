@@ -1,25 +1,24 @@
-## Node_Assignment
-
-## Clone the project
-
-## Switch to directory
+#### Clone the project
 
 cd server
+
+#### Switch to directory
+
 npm install
 
-## Create .env file in server
+#### Create .env file in server
 
 Copy content of .env.example to your .env file
 
-## For migrations use following command
+#### For migrations use following command
 
 node seed
 
-## Start server
+#### Start server
 
 npm start
 
-## Test Api in postman
+#### Test Api in postman
 
 import environment json in your environment section
 import collection json in your collection section
