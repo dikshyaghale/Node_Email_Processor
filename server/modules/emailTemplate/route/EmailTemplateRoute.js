@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../../middlewares/auth");
 const multer = require("multer");
-const { fileStorage } = require("../../../utils");
+const { fileStorage } = require("../../../utils.js");
 
 const upload = multer({ storage: fileStorage });
 

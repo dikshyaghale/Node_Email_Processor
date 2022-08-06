@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "b026a5ec-b945-4820-8d18-8f6e45d0a79a",
+		"name": "Bulk Email",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13679058"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "New Folder",
+					"item": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\":\"test\",\n  \"email\":\"dikshyagh123@gmail.com\",\n  \"password\":\"hello\",\n  \"phone\":\"9812121212\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/read",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"dikshyagh123@gmail.com\",\n    \"password\":\"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "email template",
+			"item": [
+				{
+					"name": "Get all email template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/email-template/read",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"email-template",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get email template by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/email-template/read/{template-id}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"email-template",
+								"read",
+								"{template-id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/dikshya/Downloads/final.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/email-template/bulk/{template-id}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"email-template",
+								"bulk",
+								"{template-id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

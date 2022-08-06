@@ -6,15 +6,7 @@ const multer = require("multer");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const sendEmail = (to, from, subject, text, html) => {
-    const message = {
-        to,
-        from,
-        subject,
-        text,
-        html,
-    };
-
+const sendEmail = (message) => {
     return sgMail.send(message, function (err, result) {
         if (err) {
             console.log("Email Not Sent");
@@ -60,6 +52,7 @@ const csvToJSON = (filePath) => {
         }
         result.push(obj);
     }
+
     return result;
 };
 

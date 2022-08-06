@@ -3,7 +3,7 @@ const omit = require("lodash/omit");
 const jwt = require("jsonwebtoken");
 
 const { User } = require("../model/User");
-const { sendEmail, verificationToken } = require("../../../utils");
+const { sendEmail, verificationToken } = require("../../../utils.js");
 
 const validator = require("../validator/UserValidator");
 
@@ -77,15 +77,8 @@ exports.activeAccount = (req, res) => {
                                     .status(500)
                                     .send({ msg: err.message });
                             } else {
-                                var link;
-                                if (process.env.NODE_ENV === "production") {
-                                    link =
-                                        process.env.VERIFICATION_LINK +
-                                        "/login";
-                                } else {
-                                    // "${process.env.VERIFICATION_LINK}/api/user/confirmation/${token}";
-                                    link = `${process.env.VERIFICATION_LINK}`;
-                                }
+                                const link = `${process.env.CLIENT_URL}`;
+
                                 const message = `<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -158,13 +151,16 @@ const emailVerificationLink = async (user) => {
      
      Thank You!`;
     }
-    const verificationEmail = await sendEmail(
-        user.email,
-        from,
-        subject,
-        text,
-        html
-    );
+
+    const message = {
+        to: user.email,
+        from: from,
+        subject: subject,
+        text: text,
+        html: html,
+    };
+
+    const verificationEmail = await sendEmail(message);
     if (verificationEmail) {
         return `A verification email has been sent to 
       ${user.email}. It will be expire after one hour. If you not get verification Email click on resend token.`;

@@ -1,5 +1,5 @@
 const { EmailTemplate } = require("../model/EmailTemplate");
-const { sendBulkEmail, xlsxToJSON, csvToJSON } = require("../../../utils");
+const { sendBulkEmail, xlsxToJSON, csvToJSON } = require("../../../utils.js");
 
 exports.readAll = async (req, res) => {
     const template = await EmailTemplate.find();
@@ -24,7 +24,6 @@ exports.bulkEmail = async (req, res) => {
     const emails = jsonData.map((data) => {
         return data.email;
     });
-    console.log(emails, "emials");
 
     const template = await EmailTemplate.findById(req.params.id);
     if (!template)
@@ -41,7 +40,7 @@ exports.bulkEmail = async (req, res) => {
     try {
         await sendBulkEmail(message);
 
-        res.send("Email Sent");
+        res.status(200).send("Email Sent");
     } catch (e) {
         res.status(400).send("Something went wrong");
     }
