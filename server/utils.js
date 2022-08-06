@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
 const xlsx = require("xlsx");
 const fs = require("fs");
+const multer = require("multer");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -37,15 +38,24 @@ const sendBulkEmail = (message) => {
     });
 };
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "");
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
+});
+
 const csvToJSON = (filePath) => {
     const csv = fs.readFileSync(filePath);
     const lines = csv.toString().split("\n");
     const result = [];
     const headers = lines[0].split(",");
-    for (var i = 1; i < lines.length; i++) {
-        var obj = {};
-        var currentline = lines[i].split(",");
-        for (var j = 0; j < headers.length; j++) {
+    for (let i = 1; i < lines.length; i++) {
+        const obj = {};
+        const currentline = lines[i].split(",");
+        for (let j = 0; j < headers.length; j++) {
             obj[headers[j]] = currentline[j];
         }
         result.push(obj);
@@ -78,3 +88,4 @@ exports.sendBulkEmail = sendBulkEmail;
 exports.csvToJSON = csvToJSON;
 exports.xlsxToJSON = xlsxToJSON;
 exports.verificationToken = verificationToken;
+exports.fileStorage = fileStorage;
